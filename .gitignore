@@ -5,3 +5,4 @@ priv
 *.beam
 .*.swp
 .*.swo
+fnt_lex.erl
