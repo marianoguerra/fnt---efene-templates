@@ -2,20 +2,19 @@
 
 Definitions.
 
-OpenBlock  = {{
-CloseBlock = }}
-Open       = \${
-Close      = }
+Dolar      = \$
+Open       = {
+Close      = \}
 
-Text       = .*
+Text       = .|[^\${}]*
 
 Rules.
 
-{OpenBlock}  : make_token(open_block, TokenLine, TokenChars).
-{CloseBlock} : make_token(close_block, TokenLine, TokenChars).
-{Open}       : make_token(open, TokenLine, TokenChars).
-{Close}      : make_token(close, TokenLine, TokenChars).
-{Text}       : make_token(text, TokenLine, TokenChars).
+{Open}{Open}   : make_token(open_block, TokenLine, TokenChars).
+{Close}{Close} : make_token(close_block, TokenLine, TokenChars).
+{Dolar}{Open}  : make_token(open, TokenLine, TokenChars).
+{Close}        : make_token(close, TokenLine, TokenChars).
+{Text}         : make_token(text, TokenLine, TokenChars).
 
 Erlang code.
 
