@@ -2,3 +2,4 @@
 erlc fnt_lex.xrl
 erlc fnt_lex.erl
 erlc fnt.erl
+mv *.beam ../ebin
