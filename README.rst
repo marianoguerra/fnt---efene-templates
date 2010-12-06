@@ -8,9 +8,8 @@ hopefuly an implementation of jquery template[1] for erlang/efene
 why it's awesome?
 -----------------
 
-* compile to erlang bytecode for awesome speed
-* hand made lexer and parser for awesome speed
-* uses io lists (no string concatenation) for awesome speed
+* compile to erlang bytecode
+* uses io lists (no string concatenation)
 * write your templates once, run them in the server and the browser
 * jquery templates awesomeness
 * erlang/efene awesomness
@@ -40,9 +39,13 @@ nope
   * to check that we get the same results as jquery-tmpl
   * to check that it works in all cases
 
-hey! you are the efene guy? why is it in erlang then?
------------------------------------------------------
+hey! aren't you the efene guy? why is it in erlang then?
+--------------------------------------------------------
 
-I don't want to push efene as a dependency, but as I said efene is awesome so go and check it out!
+I don't want to push efene as a dependency, but as I said efene is awesome so
+go and check it out!
 
+so... why is it called efene template if it's written in erlang?
+----------------------------------------------------------------
 
+because it will be in the efene standard library and I'm really bad at names ;)
