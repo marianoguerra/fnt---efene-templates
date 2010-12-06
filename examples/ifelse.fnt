@@ -1,0 +1,1 @@
+{{if user == "admin"}} wellcome sir {{else}} hello! {{/if}}

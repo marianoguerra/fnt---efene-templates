@@ -1,29 +1,54 @@
 -module(test_fnt).
 -compile(export_all).
 
-assert_tokens_num(Tpl, Count) ->
-    {ok, Tokens} = fnt:lex(string, Tpl),
-    RealCount = length(Tokens),
+equals(A, A) ->
+    io:format("ok: both are ~p~n", [A]);
 
-    case RealCount  of
-        Count ->
-            io:format("ok: ~s has ~p tokens~n", [Tpl, Count]);
-        _ ->
-            io:format("error: ~s has ~p tokens not ~p~n       ~p~n", [Tpl, RealCount, Count, Tokens])
-    end.
+equals(A, B) ->
+    io:format("error: ~p != ~p~n", [A, B]).
 
-test_template_tag() ->
-    assert_tokens_num("${b}", 3),
-    assert_tokens_num("a ${b} c", 5),
-    assert_tokens_num("<a href='#'>${b} c</a> ${d}", 8),
-    assert_tokens_num("<a href='#'>${b} $c</a> ${d}", 10),
-    assert_tokens_num("<a href='#'>${b} {c</a> ${d}", 10),
-    assert_tokens_num("<a href='#'>${b} c}</a> ${d}", 10),
-    assert_tokens_num("${b.c.d}", 3),
-    assert_tokens_num("aasd ${b.foo()} casdgf  sfsg gfdsg", 5),
-    ok.
+template_path(Name) ->
+    "../../examples/" ++ Name ++ ".fnt".
+
+test_ast() ->
+    Ast = fnt:to_ast(templates, [
+        {basic, template_path("basic")},
+        {value, template_path("value")},
+        {if_t, template_path("if")},
+        {html, template_path("html")},
+        {each, template_path("each")}
+    ], []),
+
+    %io:format("~p~n", [Ast]).
+    io:format("~s~n", [fnt:to_erlang(Ast)]),
+    Ast.
+
+test_compile() ->
+    Mod = fnt:compile(templates, [
+        {basic, template_path("basic")},
+        {value, template_path("value")},
+        {if_t, template_path("if")},
+        {html, template_path("html")},
+        {each, template_path("each")}
+    ]),
+
+    fnt:bin_to_file(Mod, "templates.beam").
+
+test_get() ->
+    equals(fnt:get([{a, 5}], [a]), 5),
+    equals(fnt:get([{a, 5}], [b]), undefined),
+    equals(fnt:get([{a, 5}], [a, b]), undefined),
+    equals(fnt:get([], [a]), undefined),
+
+    equals(fnt:get([{a, [{b, 5}]}], [b]), undefined),
+    equals(fnt:get([{a, [{b, 5}]}], [a, b]), 5),
+    equals(fnt:get([{a, [{b, 5}]}], [a, a]), undefined),
+    equals(fnt:get([{a, [{b, 5}]}], [a, b, a]), undefined)
+    .
 
 run() ->
-    test_template_tag(),
+    test_get(),
+    test_ast(),
+    test_compile(),
     ok.
 

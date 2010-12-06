@@ -1,0 +1,4 @@
+things:
+{{each things}}
+thing ${$index}: ${$value}
+{{/each}}
