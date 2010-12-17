@@ -11,3 +11,4 @@ Contents:
    api   
    tutorial
    license
+   faq

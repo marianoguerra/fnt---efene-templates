@@ -32,7 +32,6 @@ nope
   * tmpl
   * wrap
 
-* needs documentation
 * needs tests
   
   * to check compliance with js semantics
