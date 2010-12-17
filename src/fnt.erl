@@ -383,9 +383,19 @@ dummy_body(Line) ->
 % true FalseAst if False
 
 gen_bool_case(Line, CondAst, TrueAst, FalseAst) ->
+    NewTrueAst = case length(TrueAst) > 1 of
+        true -> [exprs_to_io_list(Line, TrueAst)];
+        false -> TrueAst
+    end,
+
+    NewFalseAst = case length(FalseAst) > 1 of
+        true -> [exprs_to_io_list(Line, FalseAst)];
+        false -> FalseAst
+    end,
+
     {'case', Line, CondAst,
-        [gen_bool_clause(Line, true,  TrueAst),
-            {clause, Line, [{var, Line, '_'}], [], FalseAst}]}.
+        [gen_bool_clause(Line, true,  NewTrueAst),
+            {clause, Line, [{var, Line, '_'}], [], NewFalseAst}]}.
 
 % generate a clause where the value to match is a boolean
 % Line is the line number and AstsBody is a list of Ast nodes representing the
