@@ -1,6 +1,14 @@
 About fnt - efene templates
 ---------------------------
 
+first the most important, fnt code is hosted at github here:
+
+https://github.com/marianoguerra/fnt---efene-templates
+
+you are invited to contribute by testing it, reporting bugs, improving the
+documentation, spreading the word and the most awesome of all, by helping with
+the development.
+
 fnt (efene templates) is an erlang module that allows to compile text templates
 into erlang modules to be used in the erlang platform (erlang, efene, reia,
 LFE, etc.)
@@ -17,4 +25,6 @@ __ http://api.jquery.com/category/plugins/templates/
 fnt templates are compiled into bytecode, you get fast page generation
 since the template is translated into an optimized function that avoids string
 concatenations.
+
+your next step should be following the :ref:`tutorial`
 
