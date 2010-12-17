@@ -1,6 +1,6 @@
 -module(fnt).
 -export([get/2, each/2, escape/1, from_file/1, parse/1, to_module/2, to_erlang/1, compile/2, to_ast/3,
-        bin_to_file/2]).
+        bin_to_file/2, build/3]).
 
 % TODO:
 %  - separate external from internal functions inside this module
@@ -70,6 +70,12 @@ to_function(Line, FunName, Ast) ->
 % convert the generated ast to erlang code
 to_erlang(Ast) ->
     erl_prettypr:format(erl_syntax:form_list(Ast)).
+
+% compile templates like compile/2 and save it in DirPath (the module name and .beam is automatically
+% appended)
+build(ModName, Templates, DirPath) ->
+    Mod = fnt:compile(ModName, Templates),
+    fnt:bin_to_file(Mod, DirPath ++ "/" ++ atom_to_list(ModName) ++ ".beam").
 
 % compile a module *ModName* with functions taken from a property list where
 % keys are function names and values are file paths to get the templates from
