@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+
+make html
+cd _build
+tar -cf docs.tar.gz html
+scp docs.tar.gz marianoguerra@marianoguerra.com.ar:~/marianoguerra.com.ar/
+ssh marianoguerra@marianoguerra.com.ar "cd ~/marianoguerra.com.ar/; rm -rf fnt; tar -xf docs.tar.gz; mv html fnt; rm docs.tar.gz"
+cd ..
+
