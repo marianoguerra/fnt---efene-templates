@@ -1,5 +1,5 @@
 -module(fnt).
--export([get/2, each/2, escape/1, from_file/1, parse/1, to_module/2, to_erlang/1, compile/2, to_ast/3,
+-export([get/2, each/2, escape/1, from_file/1, parse/1, to_module/2, to_erlang/1, to_erlang/2, compile/2, to_ast/3,
         bin_to_file/2, build/2, build/3]).
 
 % TODO:
@@ -70,6 +70,11 @@ to_function(Line, FunName, Ast) ->
 % convert the generated ast to erlang code
 to_erlang(Ast) ->
     erl_prettypr:format(erl_syntax:form_list(Ast)).
+
+% convert a templates to erlang code
+to_erlang(ModName, Templates) ->
+    Ast = fnt:to_ast(ModName, Templates, []),
+    to_erlang(Ast).
 
 % same as build/3 but compiles to the current working directory
 build(ModName, Templates) ->
