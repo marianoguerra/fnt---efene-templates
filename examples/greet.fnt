@@ -1,0 +1,3 @@
+{{if name == "admin"}} well hello sir {{else name == "root"}} you shouldn't be using the root user {{else}} welcome ${name}! {{/if}}
+
+{{if name == "mariano"}}hello mariano, you have superpowers!{{/if}}
