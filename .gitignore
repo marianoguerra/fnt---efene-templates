@@ -6,3 +6,6 @@ priv
 .*.swp
 .*.swo
 fnt_lex.erl
+erl_crash.dump
+docs/_build
+
