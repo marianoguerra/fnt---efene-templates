@@ -48,3 +48,11 @@ so... why is it called efene template if it's written in erlang?
 ----------------------------------------------------------------
 
 because it will be in the efene standard library and I'm really bad at names ;)
+
+more resources
+--------------
+
+* Website and documentation: http://marianoguerra.com.ar/fnt
+* Tutorial: http://marianoguerra.com.ar/fnt/tutorial.html
+* Blog: http://efene.tumblr.com
+* Central git repo: http://github.com/marianoguerra/fnt---efene-templates
